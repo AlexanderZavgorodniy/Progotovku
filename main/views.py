@@ -49,3 +49,10 @@ def create_menu(request):
 def create_recipe(request):
     context = {}
     return render(request, 'recipe.html', context)
+
+
+def registration(request):
+    context = {}
+    return render(request, 'register.html', context)
+
+
