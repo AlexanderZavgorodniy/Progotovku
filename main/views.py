@@ -56,3 +56,8 @@ def registration(request):
     return render(request, 'register.html', context)
 
 
+def dish(request, id):
+    context = {}
+    dish = Dish.objects.get(id = id)
+    context['dish'] = dish
+    return render(request, 'dish.html', context)

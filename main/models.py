@@ -2,15 +2,19 @@ from django.db import models
 
 
 class Product(models.Model):
-    name = models.CharField(max_length=100)
+    name = models.CharField(max_length = 100)
 
 
 class Dish(models.Model):
-    name = models.CharField(max_length=100)
+    name = models.CharField(max_length = 100)
     recept = models.TextField()
+    calories = models.PositiveIntegerField()
+    protein = models.PositiveIntegerField()
+    fat = models.PositiveIntegerField()
+    carbohydrate = models.PositiveIntegerField()
 
 
 class ProductDish(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
     dish = models.ForeignKey(Dish, on_delete=models.CASCADE)
-    grams = models.PositiveIntegerField()
+    size = models.CharField(max_length = 200)
