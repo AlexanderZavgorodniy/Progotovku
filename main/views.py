@@ -8,6 +8,8 @@ from main.models import Dish
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 
+from django.core.paginator import Paginator
+
 
 
 def index_page(request):
@@ -61,3 +63,13 @@ def dish(request, id):
     dish = Dish.objects.get(id = id)
     context['dish'] = dish
     return render(request, 'dish.html', context)
+
+
+def dish_all(request):
+    context = {}
+    dish_list = Dish.objects.all()
+    paginator = Paginator(dish_list, 9)  # 9 карточек на страницу
+
+    page_number = request.GET.get('page')
+    context['dishes'] = paginator.get_page(page_number)
+    return render(request, 'dish_all.html', context)
