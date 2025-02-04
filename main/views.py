@@ -13,19 +13,8 @@ from django.core.paginator import Paginator
 
 
 def index_page(request):
-    recipes = Dish.objects.all()
-    for recipe in recipes:
-        print("название:", recipe.name)
-        print("рецепт:", recipe.recept)
-        print("ингредиенты:")
-        for productdish in recipe.productdish_set.all():
-            print("-", productdish.product.name, productdish.grams)
-        print()
-    context = {
-        'name': 'Сашик',
-        'time': datetime.datetime.now()
-    }
-    return render(request, 'index.html', context)
+    return redirect('home')
+
 
 
 def logout_view(request):

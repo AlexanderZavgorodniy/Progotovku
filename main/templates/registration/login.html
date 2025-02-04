@@ -1,16 +1,39 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Авторизация</title>
-</head>
-<body>
-    <h1>Авторизация</h1>
-    <hr>
-    <form method="post">
-        {% csrf_token %}
-        {{ form }}
-        <input type="submit" value="Войти">
-    </form>
-</body>
-</html>
+{% extends 'base.html' %}
+{% load forms_extras %}
+
+{% block title %} Авторизация {% endblock %}
+{% block content %}
+
+<div class="row" style="margin-top: 25px;">
+  <div class="center-block">
+    <div class="card border-warning mb-3 mx-auto" style="max-width: 40rem;">
+      <div class="card-header"><h4>Авторизация</h4></div>
+      <div class="card-body">
+        <form method="post">
+          {% csrf_token %}
+          <div class="mb-3">
+            <label for="{{ form.username.id_for_label }}" class="form-label">Имя пользователя</label>
+            {{ form.username|add_class:"form-control" }}
+          </div>
+          <div class="mb-3">
+            <label for="{{ form.password.id_for_label }}" class="form-label">Пароль</label>
+            {{ form.password|add_class:"form-control" }}
+                        {% if form.password.errors %}
+              <div class="text-danger">
+                {{ form.password.errors|join:", " }}
+              </div>
+            {% endif %}
+          </div>
+          {% if form.non_field_errors %}
+            <div class="text-danger">
+              {{ form.non_field_errors|join:", " }}
+            </div>
+          {% endif %}
+          <button type="submit" class="btn btn-dark" style="margin-top:10px">Войти</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}
