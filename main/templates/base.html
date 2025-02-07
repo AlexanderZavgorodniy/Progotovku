@@ -8,6 +8,13 @@
 </head>
 <body>
 {% include 'navigation.html' %}
+<style>
+    .form-control:focus {
+    border-color: #ffa533; /* Изменяем цвет границы */
+    box-shadow: 0 0 5px #ffa533; /* Добавляем желтую тень */
+    outline: none; /* Убираем стандартный outline */
+}
+</style>
 {% block content %}
 
 {% endblock %}

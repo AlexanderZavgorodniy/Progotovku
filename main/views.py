@@ -1,8 +1,9 @@
 import datetime
 
-from django.contrib.auth import logout
+from django.contrib.auth import logout, login
 from django.shortcuts import render
 
+from main.forms import RegistrationForm
 from main.models import Dish
 
 from django.shortcuts import render, redirect
@@ -42,9 +43,21 @@ def create_recipe(request):
     return render(request, 'recipe.html', context)
 
 
-def registration(request):
-    context = {}
-    return render(request, 'register.html', context)
+def register(request):
+    if request.method == 'POST':
+        form = RegistrationForm(request.POST)
+        if form.is_valid():
+            user = form.save()  # Сохраняем нового пользователя
+            login(request, user)  # Автоматически авторизуем пользователя после регистрации
+            #messages.success(request, "Регистрация успешно завершена!")
+            return redirect('home')  # Перенаправляем на главную страницу
+        else:
+            pass
+           # messages.error(request, "Ошибка регистрации. Пожалуйста, исправьте данные.")
+    else:
+        form = RegistrationForm()
+
+    return render(request, 'registration/register.html', {'form': form})
 
 
 def dish(request, id):

@@ -17,7 +17,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from django.contrib.auth import (views as auth_views)
-from main.views import index_page, logout_view, home_page, profile, create_menu, create_recipe, registration, dish, dish_all
+from main.views import index_page, logout_view, home_page, profile, create_menu, create_recipe, register, dish, dish_all
 from django.shortcuts import render
 from django.contrib.auth.forms import UserCreationForm
 from django.http import HttpResponseRedirect
@@ -32,7 +32,7 @@ urlpatterns = [
     path('profile/', profile, name = 'profile'),
     path('menu/', create_menu, name = 'menu'),
     path('recipe/', create_recipe, name = 'recipe'),
-    path('register/', registration, name = 'register'),
     path('dish/<int:id>', dish, name = 'dish'),
-    path('dish/all/', dish_all, name = 'dish_all')
+    path('dish/all/', dish_all, name = 'dish_all'),
+    path('register/', register, name='register')
 ]

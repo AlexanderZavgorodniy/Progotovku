@@ -1,53 +1,28 @@
+{% extends 'base.html' %}
 {% load my_tags %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <meta charset="UTF-8">
-    <title>Главная</title>
+{% block title %} Все рецепты {% endblock %}
+{% block content %}
+<main>
     <style>
-    .btn-warning:hover {
-        background-color: #e6a300; /* Темнее желтого цвета */
-        border-color: #d18a00; /* Темнее границы */
-    }
-        .card-body {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between; /* Равномерное распределение пространства */
-}
-        .card {
-    height: 250px; /* Установите нужную высоту */
-}
-        .pagination .page-item.active .page-link {
-    background-color: #ffc107; /* Желтый фон для активной кнопки */
-    color: black; /* Черный текст для активной кнопки */
-}
-
-.pagination .page-link {
-    color: black; /* Черный текст для остальных кнопок */
-}
-
-.pagination .page-link:hover {
-    background-color: #e0a800; /* Темнее желтого при наведении */
-    color: black; /* Черный текст при наведении */
-}
-        .pagination {
-    justify-content: center; /* Центрирование */
+      .card-title {
+    min-height: 48px; /* Минимальная высота для двух строк */
+    line-height: 24px; /* Высота одной строки */
+    display: -webkit-box;
+    -webkit-line-clamp: 2; /* Количество строк */
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 </style>
-</head>
-<body>
-{% include 'navigation.html' %}
-<main>
+
 <div class="container">
         <div class="row" style="margin-top: 25px;">
             {% for dish in dishes %}
                 <div class="col-md-4">
                     <div class="card mb-4">
                         <div class="card-body">
-                            <h5 class="card-title">{{ dish.name }}</h5>
-                            <ul>
+                            <h5 class="card-title  h-100">{{ dish.name }}</h5>
+                            <ul class="h-100">
               <li>
                   Калории: {{ dish.calories }} ккал
               </li>
@@ -109,6 +84,5 @@
         </nav>
     </div>
 </main>
+{% endblock %}
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-</body>
-</html>
