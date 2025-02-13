@@ -2,7 +2,43 @@
 {% load my_tags %}
 {% block title %} Профиль {% endblock %}
 {% block content %}
-<p>
-    Профиль
-</p>
+<main>
+<div class="row" style="margin-top: 25px;">
+  <div class="center-block">
+    <div class="card border-warning mb-3 mx-auto" style="max-width: 40rem;">
+      <div class="card-header"><h4> {{ request.user }} </h4></div>
+      <div class="card-body">
+          <p>
+              Почта: {{ request.user.email }}
+          </p>
+          {% if calories %}
+            <p>
+                Ежедневная норма: {{ calories }}
+            </p>
+          {% else %}
+            <p>
+                {{ warning }}
+             </p>
+          {% endif %}
+          <p>
+              <form method="POST" action="{% url 'profile' %}" class="mt-3">
+                        {% csrf_token %} <!-- Токен безопасности для POST-запросов -->
+                        <div class="mb-3">
+                            <input
+                                type="number"
+                                id="calories_num"
+                                name="calories_num"
+                                class="form-control"
+                                placeholder="Введите количество калорий"
+                                min="500"
+                                required>
+                        </div>
+                        <button type="submit" class="btn btn-warning">Обновить</button>
+                    </form>
+          </p>
+      </div>
+    </div>
+</div>
+</div>
+</main>
 {% endblock %}

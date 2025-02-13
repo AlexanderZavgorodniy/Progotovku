@@ -1,8 +1,44 @@
 {% extends 'base.html' %}
 {% load my_tags %}
-{% block title %} Менюшка {% endblock %}
+{% block title %} Меню {% endblock %}
 {% block content %}
-<p>
-    Менюшка
-</p>
+<main>
+    <style>
+        .card-title {
+            min-height: 48px; /* Минимальная высота для двух строк */
+            line-height: 24px; /* Высота одной строки */
+            display: -webkit-box;
+            -webkit-line-clamp: 2; /* Количество строк */
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+    </style>
+    <div class="container">
+        <h2 class="text-center mt-5">Рекомендуемое меню</h2>
+        {% if error %}
+            <p class="text-danger text-center">{{ error }}</p>
+        {% else %}
+            <p class="text-center"><strong>Общая калорийность:</strong> {{ total_calories }} ккал</p>
+            <div class="row" style="margin-top: 25px;">
+                {% for dish in closest_dishes %}
+                    <div class="col-md-4">
+                        <div class="card mb-4">
+                            <div class="card-body">
+                                <h5 class="card-title h-100">{{ dish.name }}</h5>
+                                <ul class="h-100">
+                                    <li>Калории: {{ dish.calories }} ккал</li>
+                                    <li>Белки: {{ dish.protein }} гр</li>
+                                    <li>Жиры: {{ dish.fat }} гр</li>
+                                    <li>Углеводы: {{ dish.carbohydrate }} гр</li>
+                                </ul>
+                                <a href="{% url 'dish' dish.id %}" class="btn btn-warning">Открыть рецепт</a>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+    </div>
+</main>
 {% endblock %}
