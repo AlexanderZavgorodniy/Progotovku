@@ -1,0 +1,3 @@
+openai==1.78.0
+Django==5.1.4
+django-registration==5.1.0
