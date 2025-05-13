@@ -119,7 +119,6 @@ def create_recipe(request):
     return render(request, "recipe.html", context)
 
 
-@login_required
 def register(request):
     if request.method == "POST":
         form = RegistrationForm(request.POST)
